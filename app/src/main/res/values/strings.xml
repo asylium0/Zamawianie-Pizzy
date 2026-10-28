@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Zamawianie pizzy</string>
+    <string name="tv_header">Zamów pizzę!</string>
+    <string name="tv_label_adress">Podaj adress:</string>
+    <string name="et_adress">np. Cytrynowa 12/5</string>
+    <string name="tv_label_phone">Podaj numer telefonu:</string>
+    <string name="et_phone">+48123456789</string>
+    <string name="cb_salami">Salami</string>
+    <string name="cb_mushrooms">Grzyby</string>
+    <string name="cb_crust_cheese">Ser w bokach</string>
+    <string name="tv_label_size">Wybierz rozmiar:</string>
+    <string name="rb_medium">Średnia</string>
+    <string name="rb_large">Duża</string>
+    <string name="rb_xxl">Familijna XXL</string>
+    <string name="tv_label_amount">Ilość: %s</string>
+    <string name="btn_submit">Zamów</string>
 </resources>

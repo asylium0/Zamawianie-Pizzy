@@ -1,12 +1,16 @@
 package com.example.zamawianiepizzy;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,21 +19,43 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView tvLabelAmount, tvResult;
     private EditText etAdress, etPhone;
     private CheckBox cbSalami, cbMushrooms, cbCrustCheese;
     private RadioButton rbMedium, rbLarge, rbXXL;
     private SeekBar sbAmount;
     private Spinner spType;
+
+    private String sbAmountProgress;
+
+    private LinearLayout layoutType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-
+        etAdress = findViewById(R.id.etAdress);
+        etPhone = findViewById(R.id.etPhone);
+        cbSalami = findViewById(R.id.cbSalami);
+        cbMushrooms = findViewById(R.id.cbMushrooms);
+        cbCrustCheese = findViewById(R.id.cbCrustCheese);
+        rbMedium = findViewById(R.id.rbMedium);
+        rbLarge = findViewById(R.id.rbLarge);
+        rbXXL = findViewById(R.id.rbXXL);
+        sbAmount = findViewById(R.id.sbAmount);
+        spType = findViewById(R.id.spType);
+        tvLabelAmount = findViewById(R.id.tvLabelAmount);
+        tvResult = findViewById(R.id.tvResult);
+        layoutType = findViewById(R.id.layoutType);
 
 
         setUpTypeSpinner();
+        setUpListeners();
+        sbAmountProgress = String.valueOf(sbAmount.getProgress());
+        tvLabelAmount.setText(getString(R.string.tv_label_amount, sbAmountProgress));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -45,6 +71,23 @@ public class MainActivity extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spType.setAdapter(adapter);
+    }
+
+
+    private void setUpListeners(){
+        spType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == spType.getCount()-1){
+                    layoutType.setVisibility(View.VISIBLE);
+                }else{
+                    layoutType.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {   }
+        });
     }
 
 

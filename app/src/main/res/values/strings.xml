@@ -32,4 +32,12 @@
     <string name="error_size">Błąd! Nie wybrano rozmiaru!</string>
     <string name="error_custom">Błąd! Przy customowej pizzy musisz wybrać minimum 1 dodatek!</string>
 
+    <string name="confirm_title">Na pewno?</string>
+    <string name="confirm_message">Na pewno chcesz zamówić tą pizzę?</string>
+    <string name="yes">Tak, zamawiam</string>
+    <string name="no">Nie, wracam do wyboru</string>
+
+    <string name="sent">Zamówienie w toku…</string>
+    <string name="undo">Cofnij</string>
+
 </resources>

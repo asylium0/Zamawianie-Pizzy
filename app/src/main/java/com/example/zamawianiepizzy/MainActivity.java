@@ -1,5 +1,6 @@
 package com.example.zamawianiepizzy;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -110,10 +113,23 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {    }
         });
 
-        btnSubmit.setOnClickListener(v -> validate());
+        btnSubmit.setOnClickListener(v -> askForConfirmation());
     }
     
-    
+
+    private void askForConfirmation(){
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.confirm_title)
+                .setMessage(R.string.confirm_message)
+                .setPositiveButton(R.string.yes, (dialog, which) -> validate())
+                .setNegativeButton(R.string.no, null)
+                .show();
+
+        Snackbar.make(findViewById(R.id.main), R.string.sent, Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo, v -> tvResult.setText(""))
+                .show();
+    }
+
     private void validate(){
         String adressString = etAdress.getText().toString();
         if(adressString.isEmpty()){

@@ -16,7 +16,8 @@
     <string name="btn_submit">Zamów</string>
 
 
-    <string name="tv_result"></string>
+    <string name="tv_result_format">Adres: %s\n Nr Telefonu: %s\nRodzaj: %s%s\nRozmiar: %s\nIlość: %s</string>
+    <string name="tv_toppings_format">\nDodatki: %s</string>
 
     <string-array name="types">
         <item>-- Wybierz pizzę --</item>

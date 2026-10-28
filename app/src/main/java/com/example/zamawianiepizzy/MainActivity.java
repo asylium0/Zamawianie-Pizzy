@@ -116,26 +116,33 @@ public class MainActivity extends AppCompatActivity {
 
         RadioButton chosenSize = findViewById(rgSize.getCheckedRadioButtonId());
         String sizeString = chosenSize.getText().toString();
+
         String customOrderString = "";
         if(layoutType.getVisibility() == View.VISIBLE){
             customOrderString = getCustomOrder();
         }
 
+        String typeString = spType.getSelectedItem().toString();
+
+        String adressString = etAdress.getText().toString();
+
+        String phoneString = etPhone.getText().toString();
 
 
-        tvResult.setText("Rozmiar: "+sizeString+customOrderString);
+
+        tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customOrderString, sizeString, sbAmountProgress));
     }
 
 
     private String getCustomOrder() {
-        String checkboxString = "\nDodatki: ";
+        String checkboxString = "";
         CheckBox[] checkBoxes = {cbCrustCheese, cbMushrooms, cbSalami};
         for (CheckBox i : checkBoxes){
             if(i.isChecked()){
                 checkboxString += ", "+i.getText().toString();
             }
         }
-        return checkboxString;
+        return getString(R.string.tv_toppings_format, checkboxString);
     }
 
 

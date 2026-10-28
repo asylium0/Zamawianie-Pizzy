@@ -135,14 +135,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String getCustomOrder() {
-        String checkboxString = "";
+        StringBuilder checkboxString = new StringBuilder();
         CheckBox[] checkBoxes = {cbCrustCheese, cbMushrooms, cbSalami};
         for (CheckBox i : checkBoxes){
             if(i.isChecked()){
-                checkboxString += ", "+i.getText().toString();
+                checkboxString.append(", ").append(i.getText().toString());
             }
         }
-        return getString(R.string.tv_toppings_format, checkboxString);
+        return getString(R.string.tv_toppings_format, checkboxString.toString());
     }
 
 

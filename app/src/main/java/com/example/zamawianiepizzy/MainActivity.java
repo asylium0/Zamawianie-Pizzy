@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private String sbAmountProgress;
 
     private LinearLayout layoutType;
+    private Button btnSubmit;
+    private RadioGroup rgSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         tvLabelAmount = findViewById(R.id.tvLabelAmount);
         tvResult = findViewById(R.id.tvResult);
         layoutType = findViewById(R.id.layoutType);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        rgSize = findViewById(R.id.rgSize);
 
 
         setUpTypeSpinner();
@@ -88,6 +94,48 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {   }
         });
+
+        sbAmount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                sbAmountProgress = String.valueOf(sbAmount.getProgress());
+                tvLabelAmount.setText(getString(R.string.tv_label_amount, sbAmountProgress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {   }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {    }
+        });
+
+        btnSubmit.setOnClickListener(v -> createResult());
+    }
+
+    private void createResult(){
+
+        RadioButton chosenSize = findViewById(rgSize.getCheckedRadioButtonId());
+        String sizeString = chosenSize.getText().toString();
+        String customOrderString = "";
+        if(layoutType.getVisibility() == View.VISIBLE){
+            customOrderString = getCustomOrder();
+        }
+
+
+
+        tvResult.setText("Rozmiar: "+sizeString+customOrderString);
+    }
+
+
+    private String getCustomOrder() {
+        String checkboxString = "\nDodatki: ";
+        CheckBox[] checkBoxes = {cbCrustCheese, cbMushrooms, cbSalami};
+        for (CheckBox i : checkBoxes){
+            if(i.isChecked()){
+                checkboxString += ", "+i.getText().toString();
+            }
+        }
+        return checkboxString;
     }
 
 

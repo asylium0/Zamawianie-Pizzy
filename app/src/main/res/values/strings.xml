@@ -27,4 +27,9 @@
         <item>Customowa</item>
     </string-array>
 
+    <string name="error_empty">Musisz uzupełnić to pole</string>
+    <string name="error_type">Błąd! Wybrano zły typ pizzy!</string>
+    <string name="error_size">Błąd! Nie wybrano rozmiaru!</string>
+    <string name="error_custom">Błąd! Przy customowej pizzy musisz wybrać minimum 1 dodatek!</string>
+
 </resources>

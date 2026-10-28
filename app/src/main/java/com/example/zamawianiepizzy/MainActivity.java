@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,9 +110,45 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {    }
         });
 
-        btnSubmit.setOnClickListener(v -> createResult());
+        btnSubmit.setOnClickListener(v -> validate());
     }
+    
+    
+    private void validate(){
+        String adressString = etAdress.getText().toString();
+        if(adressString.isEmpty()){
+            etAdress.setError(getString(R.string.error_empty));
+            etAdress.requestFocus();
+            return;
+        }
+        
+        String phoneString = etPhone.getText().toString();
+        if (phoneString.isEmpty()){
+            etPhone.setError(getString(R.string.error_empty));
+            etPhone.requestFocus();
+            return;
+        }
+        
+        if (spType.getSelectedItemPosition() == 0) {
+            Toast.makeText(this, R.string.error_type, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        if(rgSize.getCheckedRadioButtonId() == -1){
+            Toast.makeText(this, R.string.error_size, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        if(layoutType.getVisibility() == View.VISIBLE && !cbSalami.isChecked() && !cbMushrooms.isChecked() && !cbCrustCheese.isChecked()){
+            Toast.makeText(this, R.string.error_custom, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        createResult();
+    }
+    
+    
     private void createResult(){
 
         RadioButton chosenSize = findViewById(rgSize.getCheckedRadioButtonId());
@@ -144,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return getString(R.string.tv_toppings_format, checkboxString.toString());
     }
+
+    
 
 
 }

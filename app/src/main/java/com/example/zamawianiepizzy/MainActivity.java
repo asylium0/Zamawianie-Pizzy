@@ -2,6 +2,7 @@ package com.example.zamawianiepizzy;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -139,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
         }
         
         String phoneString = etPhone.getText().toString();
-        if (phoneString.isEmpty()){
-            etPhone.setError(getString(R.string.error_empty));
+        if (!Patterns.PHONE.matcher(phoneString).matches()){
+            etPhone.setError(getString(R.string.error_wrong_phone));
             etPhone.requestFocus();
             return;
         }

@@ -126,9 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.no, null)
                 .show();
 
-        Snackbar.make(findViewById(R.id.main), R.string.sent, Snackbar.LENGTH_LONG)
-                .setAction(R.string.undo, v -> tvResult.setText(""))
-                .show();
+
     }
 
     private void validate(){
@@ -161,10 +159,16 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+    submit();
+    }
+    private void submit(){
+        Snackbar.make(findViewById(R.id.main), R.string.sent, Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo, v -> tvResult.setText(""))
+                .show();
+
 
         createResult();
     }
-    
     
     private void createResult(){
 

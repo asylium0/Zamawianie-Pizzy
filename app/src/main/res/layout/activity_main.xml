@@ -18,10 +18,13 @@
 
         <TextView
             android:id="@+id/tvHeader"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#F29E9E"
             android:text="@string/tv_header"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:padding="5dp"/>
 
         <TextView
             android:id="@+id/tvLabelAdress"
@@ -32,7 +35,7 @@
 
         <EditText
             android:id="@+id/etAdress"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"

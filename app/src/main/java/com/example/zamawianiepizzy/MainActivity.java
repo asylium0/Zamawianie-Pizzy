@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvLabelAmount, tvResult;
     private EditText etAdress, etPhone;
     private CheckBox cbSalami, cbMushrooms, cbCrustCheese;
-    private RadioButton rbMedium, rbLarge, rbXXL;
     private SeekBar sbAmount;
     private Spinner spType;
 

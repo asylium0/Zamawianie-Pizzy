@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox cbSalami, cbMushrooms, cbCrustCheese;
     private SeekBar sbAmount;
     private Spinner spType;
-
+    private RadioButton rbMedium, rbLarge, rbXXL;
     private String sbAmountProgress;
 
     private LinearLayout layoutType;
-    private Button btnSubmit;
+    private Button btnSubmit, btnClear;
     private RadioGroup rgSize;
 
     @Override
@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         layoutType = findViewById(R.id.layoutType);
         btnSubmit = findViewById(R.id.btnSubmit);
         rgSize = findViewById(R.id.rgSize);
+        btnClear = findViewById(R.id.btnClear);
+        rbMedium = findViewById(R.id.rbMedium);
+        rbLarge = findViewById(R.id.rbLarge);
+        rbXXL = findViewById(R.id.rbXXL);
 
 
         setUpTypeSpinner();
@@ -110,11 +114,24 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {    }
         });
 
-        btnSubmit.setOnClickListener(v -> askForConfirmation());
+        btnSubmit.setOnClickListener(v -> askForOrderConfirmation());
+        btnClear.setOnClickListener(v -> clearForm());
     }
     
+    private void clearForm(){
+        etAdress.setText("");
+        etPhone.setText("");
+        spType.setSelection(0);
+        cbMushrooms.setChecked(false);
+        cbCrustCheese.setChecked(false);
+        cbSalami.setChecked(false);
+        rbMedium.setChecked(false);
+        rbLarge.setChecked(false);
+        rbXXL.setChecked(false);
+        sbAmount.setProgress(1);
+    }
 
-    private void askForConfirmation(){
+    private void askForOrderConfirmation(){
         new AlertDialog.Builder(this)
                 .setTitle(R.string.confirm_title)
                 .setMessage(R.string.confirm_message)

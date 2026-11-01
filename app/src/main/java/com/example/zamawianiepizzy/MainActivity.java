@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         cbSalami = findViewById(R.id.cbSalami);
         cbMushrooms = findViewById(R.id.cbMushrooms);
         cbCrustCheese = findViewById(R.id.cbCrustCheese);
-        rbMedium = findViewById(R.id.rbMedium);
-        rbLarge = findViewById(R.id.rbLarge);
-        rbXXL = findViewById(R.id.rbXXL);
         sbAmount = findViewById(R.id.sbAmount);
         spType = findViewById(R.id.spType);
         tvLabelAmount = findViewById(R.id.tvLabelAmount);

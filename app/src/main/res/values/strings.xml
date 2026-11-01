@@ -14,6 +14,7 @@
     <string name="rb_xxl">Familijna XXL</string>
     <string name="tv_label_amount">Ilość: %s</string>
     <string name="btn_submit">Zamów</string>
+    <string name="btn_clear">Wyczyść</string>
 
 
     <string name="tv_result_format">Adres: %s\n Nr Telefonu: %s\nRodzaj: %s%s\nRozmiar: %s\nIlość: %s</string>

@@ -138,7 +138,13 @@
             android:progress="1"/>
 
         <Button
+            android:id="@+id/btnClear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            android:text="@string/btn_clear" />
+
+        <Button
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

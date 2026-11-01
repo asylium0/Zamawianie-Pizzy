@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutType;
     private Button btnSubmit, btnClear;
     private RadioGroup rgSize;
+    private CheckBox[] checkBoxes = {cbCrustCheese, cbMushrooms, cbSalami};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         setUpTypeSpinner();
         setUpListeners();
         sbAmountProgress = String.valueOf(sbAmount.getProgress());
+
         tvLabelAmount.setText(getString(R.string.tv_label_amount, sbAmountProgress));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -119,12 +121,53 @@ public class MainActivity extends AppCompatActivity {
     }
     
     private void clearForm(){
+        RadioButton chosenSize = findViewById(rgSize.getCheckedRadioButtonId());
+
+        CheckBox[] checkedBoxes = new CheckBox[checkBoxes.length];
+        int x = 0;
+        for (CheckBox i : checkBoxes){
+            if(i.isChecked()){
+                checkedBoxes[x] = i;
+            }
+            x++;
+        }
+        int typePos = spType.getSelectedItemPosition();
+
+        String adressString = etAdress.getText().toString();
+
+        String phoneString = etPhone.getText().toString();
+
+        int sbProgress = sbAmount.getProgress();
+
+        Snackbar.make(findViewById(R.id.main), R.string.cleared, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.undo, v -> undoClear(chosenSize, checkedBoxes, typePos, adressString, phoneString, sbProgress))
+                                .show();
+
+
+
+
+        clear();
+    }
+
+
+    private void undoClear(RadioButton prevSize, CheckBox[] checkedBoxes, int prevType, String prevAdress, String prevPhone, int prevProgress){
+        prevSize.setChecked(true);
+        for(CheckBox i : checkedBoxes){
+            i.setChecked(true);
+        }
+        spType.setSelection(prevType);
+        etAdress.setText(prevAdress);
+        etPhone.setText(prevPhone);
+        sbAmount.setProgress(prevProgress);
+    }
+
+    private void clear(){
         etAdress.setText("");
         etPhone.setText("");
         spType.setSelection(0);
-        cbMushrooms.setChecked(false);
-        cbCrustCheese.setChecked(false);
-        cbSalami.setChecked(false);
+        for (CheckBox i : checkBoxes) {
+            i.setChecked(false);
+        }
         rbMedium.setChecked(false);
         rbLarge.setChecked(false);
         rbXXL.setChecked(false);
@@ -207,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
 
     private String getCustomOrder() {
         StringBuilder checkboxString = new StringBuilder();
-        CheckBox[] checkBoxes = {cbCrustCheese, cbMushrooms, cbSalami};
         for (CheckBox i : checkBoxes){
             if(i.isChecked()){
                 checkboxString.append(", ").append(i.getText().toString());

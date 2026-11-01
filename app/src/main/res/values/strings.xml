@@ -41,5 +41,6 @@
 
     <string name="sent">Zamówienie w toku…</string>
     <string name="undo">Cofnij</string>
+    <string name="cleared">Wyczyszczono formularz</string>
 
 </resources>

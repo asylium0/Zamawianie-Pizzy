@@ -117,9 +117,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSubmit.setOnClickListener(v -> askForOrderConfirmation());
-        btnClear.setOnClickListener(v -> clearForm());
+        btnClear.setOnClickListener(v -> confrimClear());
     }
-    
+
+    private void confrimClear(){
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.confirm_title)
+                .setMessage(R.string.confirm_message)
+                .setPositiveButton(R.string.yes_clear, (dialog, which) -> clearForm())
+                .setNegativeButton(R.string.no_clear, null)
+                .show();
+    }
+
     private void clearForm(){
         RadioButton chosenSize = findViewById(rgSize.getCheckedRadioButtonId());
 
@@ -148,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
 
         clear();
     }
-
 
     private void undoClear(RadioButton prevSize, CheckBox[] checkedBoxes, int prevType, String prevAdress, String prevPhone, int prevProgress){
         prevSize.setChecked(true);

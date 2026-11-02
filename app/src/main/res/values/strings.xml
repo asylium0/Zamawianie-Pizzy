@@ -38,6 +38,8 @@
     <string name="confirm_message">Na pewno chcesz zamówić tą pizzę?</string>
     <string name="yes">Tak, zamawiam</string>
     <string name="no">Nie, wracam do wyboru</string>
+    <string name="yes_clear">Tak wyczyść</string>
+    <string name="no_clear">Nie</string>
 
     <string name="sent">Zamówienie w toku…</string>
     <string name="undo">Cofnij</string>

@@ -127,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {    }
         });
 
-        btnSubmit.setOnClickListener(v -> askForOrderConfirmation());
-        btnClear.setOnClickListener(v -> validate());
+        btnSubmit.setOnClickListener(v -> validate());
+        btnClear.setOnClickListener(v -> confrimClear());
     }
 
     private void confrimClear(){
@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(OrderSummary.EXTRA_TYPE, typeString);
         intent.putExtra(OrderSummary.EXTRA_SIZE, sizeString);
 
-        startActivity(intent);
+        summaryLauncher.launch(intent);
 
     }
 

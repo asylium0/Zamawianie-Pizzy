@@ -47,7 +47,7 @@
     <string name="yes_clear">Tak wyczyść</string>
     <string name="no_clear">Nie</string>
 
-    <string name="sent">Zamówienie w toku…</string>
+    <string name="sent">Zamówienie o cenie %s w toku…</string>
     <string name="undo">Cofnij</string>
     <string name="cleared">Wyczyszczono formularz</string>
 

@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                   // String number = result.getData().getStringExtra(OrderSummary.EXTRA_NUMBER);
-                    // showRegistered(number);
+                   int price = result.getData().getIntExtra(OrderSummary.EXTRA_PRICE, 0);
+                    showConfirmed(price);
                 }
             });
 
@@ -193,17 +193,6 @@ public class MainActivity extends AppCompatActivity {
         sbAmount.setProgress(1);
     }
 
-    private void askForOrderConfirmation(){
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.confirm_title)
-                .setMessage(R.string.confirm_message)
-                .setPositiveButton(R.string.yes, (dialog, which) -> validate())
-                .setNegativeButton(R.string.no, null)
-                .show();
-
-
-    }
-
     private void validate(){
         String adressString = etAdress.getText().toString();
         if(adressString.isEmpty()){
@@ -267,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private String getCustomOrder() {
         StringBuilder checkboxString = new StringBuilder();
         for (CheckBox i : checkBoxes){
@@ -276,6 +264,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return getString(R.string.tv_toppings_format, checkboxString.toString());
+    }
+
+    private void showConfirmed(int price){
+        Snackbar.make(findViewById(R.id.main), getString(R.string.sent, String.valueOf(price)), Snackbar.LENGTH_LONG)
+                .show();
     }
 
     

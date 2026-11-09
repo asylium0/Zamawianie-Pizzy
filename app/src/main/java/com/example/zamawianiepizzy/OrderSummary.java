@@ -1,5 +1,6 @@
 package com.example.zamawianiepizzy;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class OrderSummary extends AppCompatActivity {
     public static final String EXTRA_CUSTOM = "com.example.zamawianiepizzy.CUSTOM";
     public static final String EXTRA_SIZE = "com.example.zamawianiepizzy.SIZE";
     public static final String EXTRA_AMOUNT = "com.example.zamawianiepizzy.AMOUNT";
-
+    public static final String EXTRA_PRICE = "com.example.zamawianiepizzy.PRICE";
 
 
 
@@ -50,7 +51,9 @@ public class OrderSummary extends AppCompatActivity {
         btnEdit = findViewById(R.id.btnEdit);
 
         btnEdit.setOnClickListener(v -> finish());
-        btnConfirm.setOnClickListener(v -> return);
+        btnConfirm.setOnClickListener(v -> askForOrderConfirmation());
+
+
         tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount)));
 
 
@@ -61,5 +64,24 @@ public class OrderSummary extends AppCompatActivity {
         });
     }
 
+
+    private void askForOrderConfirmation(){
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.confirm_title)
+                .setMessage(R.string.confirm_message)
+                .setPositiveButton(R.string.yes, (dialog, which) -> confirm())
+                .setNegativeButton(R.string.no, null)
+                .show();
+
+
+    }
+    private void confirm(){
+        double cena = 20.0;
+
+        Intent result = new Intent();
+        result.putExtra(EXTRA_PRICE, cena);
+        setResult(RESULT_OK, result);
+        finish();
+    }
 
 }

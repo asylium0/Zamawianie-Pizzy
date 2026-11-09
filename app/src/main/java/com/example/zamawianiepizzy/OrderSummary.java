@@ -23,13 +23,7 @@ public class OrderSummary extends AppCompatActivity {
     public static final String EXTRA_SIZE = "com.example.zamawianiepizzy.SIZE";
     public static final String EXTRA_AMOUNT = "com.example.zamawianiepizzy.AMOUNT";
 
-    Intent intent = getIntent();
-    private String adressString = intent.getStringExtra(EXTRA_ADRESS);
-    private int amount = intent.getIntExtra(EXTRA_AMOUNT, 0);
-    private String customString = intent.getStringExtra(EXTRA_CUSTOM);
-    private String phoneString = intent.getStringExtra(EXTRA_PHONE);
-    private String typeString = intent.getStringExtra(EXTRA_TYPE);
-    private String sizeString = intent.getStringExtra(EXTRA_SIZE);
+
 
 
 
@@ -40,14 +34,24 @@ public class OrderSummary extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_order_summary);
 
+        Intent intent = getIntent();
+        String adressString = intent.getStringExtra(EXTRA_ADRESS);
+        int amount = intent.getIntExtra(EXTRA_AMOUNT, 0);
+        String customString = intent.getStringExtra(EXTRA_CUSTOM);
+        String phoneString = intent.getStringExtra(EXTRA_PHONE);
+        String typeString = intent.getStringExtra(EXTRA_TYPE);
+        String sizeString = intent.getStringExtra(EXTRA_SIZE);
+
+
+
         tvResult = findViewById(R.id.tvResult);
         btnShare = findViewById(R.id.btnShare);
         btnConfirm = findViewById(R.id.btnConfirm);
         btnEdit = findViewById(R.id.btnEdit);
 
         btnEdit.setOnClickListener(v -> finish());
-        btnConfirm.setOnClickListener(v -> buildSummary());
-        buildSummary();
+        btnConfirm.setOnClickListener(v -> buildSummary(adressString, amount, customString, phoneString, typeString, sizeString));
+        buildSummary(adressString, amount, customString, phoneString, typeString, sizeString);
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.summary), (v, insets) -> {
@@ -57,7 +61,7 @@ public class OrderSummary extends AppCompatActivity {
         });
     }
 
-    private void buildSummary(){
+    private void buildSummary(String adressString, int amount, String customString, String phoneString, String typeString, String sizeString){
         tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount)));
     }
 

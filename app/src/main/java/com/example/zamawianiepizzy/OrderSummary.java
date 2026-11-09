@@ -50,8 +50,8 @@ public class OrderSummary extends AppCompatActivity {
         btnEdit = findViewById(R.id.btnEdit);
 
         btnEdit.setOnClickListener(v -> finish());
-        btnConfirm.setOnClickListener(v -> buildSummary(adressString, amount, customString, phoneString, typeString, sizeString));
-        buildSummary(adressString, amount, customString, phoneString, typeString, sizeString);
+        btnConfirm.setOnClickListener(v -> return);
+        tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount)));
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.summary), (v, insets) -> {
@@ -61,8 +61,5 @@ public class OrderSummary extends AppCompatActivity {
         });
     }
 
-    private void buildSummary(String adressString, int amount, String customString, String phoneString, String typeString, String sizeString){
-        tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount)));
-    }
 
 }

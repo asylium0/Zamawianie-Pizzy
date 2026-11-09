@@ -1,6 +1,7 @@
 package com.example.zamawianiepizzy;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -40,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup rgSize;
     private CheckBox[] checkBoxes = {cbCrustCheese, cbMushrooms, cbSalami};
 
+    private final ActivityResultLauncher<Intent> summaryLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                   // String number = result.getData().getStringExtra(OrderSummary.EXTRA_NUMBER);
+                    // showRegistered(number);
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         sbAmount = findViewById(R.id.sbAmount);
         spType = findViewById(R.id.spType);
         tvLabelAmount = findViewById(R.id.tvLabelAmount);
-        tvResult = findViewById(R.id.tvResult);
         layoutType = findViewById(R.id.layoutType);
         btnSubmit = findViewById(R.id.btnSubmit);
         rgSize = findViewById(R.id.rgSize);
@@ -117,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSubmit.setOnClickListener(v -> askForOrderConfirmation());
-        btnClear.setOnClickListener(v -> confrimClear());
+        btnClear.setOnClickListener(v -> validate());
     }
 
     private void confrimClear(){
@@ -223,15 +234,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-    submit();
-    }
-    private void submit(){
-        Snackbar.make(findViewById(R.id.main), R.string.sent, Snackbar.LENGTH_LONG)
-                .setAction(R.string.undo, v -> tvResult.setText(""))
-                .show();
-
-
-        createResult();
+    createResult();
     }
     
     private void createResult(){
@@ -252,7 +255,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customOrderString, sizeString, sbAmountProgress));
+        Intent intent = new Intent(this, OrderSummary.class);
+        intent.putExtra(OrderSummary.EXTRA_ADRESS, adressString);
+        intent.putExtra(OrderSummary.EXTRA_AMOUNT, sbAmountProgress);
+        intent.putExtra(OrderSummary.EXTRA_CUSTOM, customOrderString);
+        intent.putExtra(OrderSummary.EXTRA_PHONE, phoneString);
+        intent.putExtra(OrderSummary.EXTRA_TYPE, typeString);
+        intent.putExtra(OrderSummary.EXTRA_SIZE, sizeString);
+
+        startActivity(intent);
+
     }
 
 

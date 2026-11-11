@@ -23,7 +23,7 @@
     <string name="header_summary">Potwierdź wybór</string>
 
 
-    <string name="tv_result_format">Adres: %s\n Nr Telefonu: %s\nRodzaj: %s%s\nRozmiar: %s\nIlość: %s</string>
+    <string name="tv_result_format">Adres: %s\n Nr Telefonu: %s\nRodzaj: %s%s\nRozmiar: %s\nIlość: %s\n\nCena zamówienia: %s zł</string>
     <string name="tv_toppings_format">\nDodatki: %s</string>
 
     <string-array name="types">
@@ -47,7 +47,7 @@
     <string name="yes_clear">Tak wyczyść</string>
     <string name="no_clear">Nie</string>
 
-    <string name="sent">Zamówienie o cenie %s w toku…</string>
+    <string name="sent">Zamówienie o cenie %s zł w toku…</string>
     <string name="undo">Cofnij</string>
     <string name="cleared">Wyczyszczono formularz</string>
 

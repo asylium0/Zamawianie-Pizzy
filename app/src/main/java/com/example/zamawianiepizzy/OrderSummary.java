@@ -16,7 +16,7 @@ public class OrderSummary extends AppCompatActivity {
 
     private TextView tvResult;
     private Button btnShare, btnConfirm, btnEdit;
-
+    private double cena;
     public static final String EXTRA_ADRESS = "com.example.zamawianiepizzy.ADRESS";
     public static final String EXTRA_PHONE = "com.example.zamawianiepizzy.PHONE";
     public static final String EXTRA_TYPE = "com.example.zamawianiepizzy.TYPE";
@@ -43,18 +43,24 @@ public class OrderSummary extends AppCompatActivity {
         String typeString = intent.getStringExtra(EXTRA_TYPE);
         String sizeString = intent.getStringExtra(EXTRA_SIZE);
 
-
-
         tvResult = findViewById(R.id.tvResult);
         btnShare = findViewById(R.id.btnShare);
         btnConfirm = findViewById(R.id.btnConfirm);
         btnEdit = findViewById(R.id.btnEdit);
 
+        if(sizeString.equals(getString(R.string.rb_medium))){
+            cena = amount * 15.0;
+        } else if (sizeString.equals(getString(R.string.rb_large))) {
+            cena = amount * 20.0;
+        }else{
+            cena = amount * 25.0;
+        }
+
         btnEdit.setOnClickListener(v -> finish());
         btnConfirm.setOnClickListener(v -> askForOrderConfirmation());
 
 
-        tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount)));
+        tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount), String.valueOf(cena)));
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.summary), (v, insets) -> {
@@ -76,8 +82,6 @@ public class OrderSummary extends AppCompatActivity {
 
     }
     private void confirm(){
-        double cena = 20.0;
-
         Intent result = new Intent();
         result.putExtra(EXTRA_PRICE, cena);
         setResult(RESULT_OK, result);

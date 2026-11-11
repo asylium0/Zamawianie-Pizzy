@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutType;
     private Button btnSubmit, btnClear;
     private RadioGroup rgSize;
-    private CheckBox[] checkBoxes = {cbCrustCheese, cbMushrooms, cbSalami};
+    private final CheckBox[] checkBoxes = new CheckBox[3];
 
     private final ActivityResultLauncher<Intent> summaryLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                   int price = result.getData().getIntExtra(OrderSummary.EXTRA_PRICE, 0);
+                   double price = result.getData().getDoubleExtra(OrderSummary.EXTRA_PRICE, 0);
                     showConfirmed(price);
                 }
             });
@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
         rbLarge = findViewById(R.id.rbLarge);
         rbXXL = findViewById(R.id.rbXXL);
 
+        checkBoxes[0] = cbCrustCheese;
+        checkBoxes[1] = cbMushrooms;
+        checkBoxes[2] = cbSalami;
 
         setUpTypeSpinner();
         setUpListeners();
@@ -246,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, OrderSummary.class);
         intent.putExtra(OrderSummary.EXTRA_ADRESS, adressString);
-        intent.putExtra(OrderSummary.EXTRA_AMOUNT, sbAmountProgress);
+        intent.putExtra(OrderSummary.EXTRA_AMOUNT, sbAmount.getProgress());
         intent.putExtra(OrderSummary.EXTRA_CUSTOM, customOrderString);
         intent.putExtra(OrderSummary.EXTRA_PHONE, phoneString);
         intent.putExtra(OrderSummary.EXTRA_TYPE, typeString);
@@ -260,13 +263,13 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder checkboxString = new StringBuilder();
         for (CheckBox i : checkBoxes){
             if(i.isChecked()){
-                checkboxString.append(", ").append(i.getText().toString());
+                checkboxString.append(i.getText().toString()).append(", ");
             }
         }
         return getString(R.string.tv_toppings_format, checkboxString.toString());
     }
 
-    private void showConfirmed(int price){
+    private void showConfirmed(double price){
         Snackbar.make(findViewById(R.id.main), getString(R.string.sent, String.valueOf(price)), Snackbar.LENGTH_LONG)
                 .show();
     }

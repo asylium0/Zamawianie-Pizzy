@@ -52,4 +52,9 @@
     <string name="cleared">Wyczyszczono formularz</string>
     <string name="share_via">Udostępnij przez</string>
 
+    <string name="header_about">O Aplikacji</string>
+    <string name="about"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac vehicula mi, non pulvinar turpis. Ut consequat urna id metus dapibus, ac placerat nibh pulvinar. Phasellus vel mi sem. Suspendisse sed tempus nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla facilisi. Praesent interdum mi lectus, et viverra nibh dignissim eget. Proin semper dolor non sapien facilisis, ac mattis mi viverra. Mauris eu urna vitae tellus consectetur vehicula ut ornare justo. In hendrerit augue nunc. Maecenas interdum eros orci, sed pulvinar lectus molestie sed. Ut id nisi dapibus, varius lorem quis, fermentum urna.
+
+Etiam eu sagittis felis. Ut placerat posuere ullamcorper. Phasellus at laoreet sem, sed fermentum felis. Donec et gravida augue, rhoncus interdum felis. Morbi porttitor accumsan risus a mollis. In neque erat, finibus sit amet nisi ac, fermentum pellentesque diam. Aenean efficitur libero sed tortor tempor gravida. Vivamus at placerat mauris. Donec egestas, massa id faucibus aliquam, nisl ligula tempor justo, vitae dictum lorem purus ac est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </string>
+
 </resources>

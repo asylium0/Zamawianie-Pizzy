@@ -61,7 +61,7 @@ public class OrderSummary extends AppCompatActivity {
         btnConfirm.setOnClickListener(v -> askForOrderConfirmation());
         btnShare.setOnClickListener(v -> share());
 
-        result = getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount), String.valueOf(cena))
+        result = getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount), String.valueOf(cena));
         tvResult.setText(result);
 
 

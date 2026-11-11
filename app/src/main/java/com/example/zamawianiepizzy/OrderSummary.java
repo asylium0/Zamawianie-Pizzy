@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class OrderSummary extends AppCompatActivity {
 
+    private String result;
     private TextView tvResult;
     private Button btnShare, btnConfirm, btnEdit;
     private double cena;
@@ -58,9 +59,10 @@ public class OrderSummary extends AppCompatActivity {
 
         btnEdit.setOnClickListener(v -> finish());
         btnConfirm.setOnClickListener(v -> askForOrderConfirmation());
+        btnShare.setOnClickListener(v -> share());
 
-
-        tvResult.setText(getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount), String.valueOf(cena)));
+        result = getString(R.string.tv_result_format, adressString, phoneString, typeString, customString, sizeString, String.valueOf(amount), String.valueOf(cena))
+        tvResult.setText(result);
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.summary), (v, insets) -> {
@@ -78,14 +80,21 @@ public class OrderSummary extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, (dialog, which) -> confirm())
                 .setNegativeButton(R.string.no, null)
                 .show();
-
-
     }
+
+
     private void confirm(){
         Intent result = new Intent();
         result.putExtra(EXTRA_PRICE, cena);
         setResult(RESULT_OK, result);
         finish();
+    }
+
+    private void share(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, result);
+        startActivity(Intent.createChooser(intent, getString(R.string.share_via)));
     }
 
 }
